@@ -88,7 +88,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 recordingStatus.textContent = "Processing audio...";
                 if (audioChunks.length === 0) { recordingStatus.textContent = "No audio recorded."; return; }
                 
-                const audioBlob = new Blob(audioChunks, { type: audioChunks[0]?.type || 'audio/webm' }); // Use type from first chunk or default
+                const audioBlob = new Blob(audioChunks, { type: audioChunks[0]?.type || 'audio/webm' });
                 audioMimeType = audioBlob.type;
                 console.log("Recorded audio MIME type:", audioMimeType);
 
@@ -153,15 +153,9 @@ analyzeButton.addEventListener('click', async () => {
     const userText = textInput.value.trim();
     
     // --- USER ACTION REQUIRED: API Key ---
-    // Replace "YOUR_GEMINI_API_KEY_HERE" with your actual Google AI Studio API key.
-    // This key is used if 'usingDirectGeminiCall' is true.
-    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; // <-- REPLACE THIS!
+    const apiKey = "YOUR_GEMINI_API_KEY_HERE"; // <-- REPLACE THIS!
     
-    // --- DEVELOPER CONFIGURATION ---
-    // Set to true to call Gemini API directly (needs apiKey above).
-    // Set to false to call a backend (you'd need to set backendApiUrl and implement that fetch).
     const usingDirectGeminiCall = true; 
-    // const backendApiUrl = 'YOUR_DJANGO_BACKEND_API_URL_HERE'; // Example
 
     if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) {
         showError("API Key not configured. Please set it in the script.js file.");
@@ -183,7 +177,7 @@ analyzeButton.addEventListener('click', async () => {
     loadingContainer.classList.remove('hidden');
     loadingStatusMessage.textContent = "Preparing your inputs for Farm Buddy..."; 
 
-    resultsSection.style.opacity = 0; // Prepare for fade-in
+    resultsSection.style.opacity = 0;
     resultsSection.classList.add('hidden'); 
     errorDisplay.classList.add('hidden');
     successDisplay.classList.add('hidden'); 
@@ -271,11 +265,11 @@ Please provide your response in the specified JSON format. Prioritize visual and
     }
     
     if (responseData) {
-        setTimeout(() => { // Keep success message a bit longer, then hide loading container
+        setTimeout(() => {
             loadingContainer.classList.add('hidden');
         }, 1500); 
     } else {
-         loadingContainer.classList.add('hidden'); // Hide if no data (e.g. error handled before this)
+         loadingContainer.classList.add('hidden');
     }
     
     analyzeButton.disabled = false;
@@ -287,18 +281,26 @@ function displayResults(data) {
     plantHealthDetailsEl.textContent = data.plant_health_details || 'No specific plant details provided by AI.';
     soilConditionEl.textContent = data.soil_condition_assessment || 'No soil assessment provided by AI.';
 
+    // --- UI IMPROVEMENT: populateList function updated to add 'checklist-item' class ---
     function populateList(element, items, defaultMessage) {
         element.innerHTML = ''; 
         if (items && items.length > 0) {
-            items.forEach(rec => {
+            items.forEach(recommendationText => {
                 const li = document.createElement('li');
-                li.textContent = rec;
+                li.classList.add('checklist-item'); // Add class for checklist styling
+                li.textContent = recommendationText;
                 element.appendChild(li);
             });
         } else {
-            element.innerHTML = `<li>${defaultMessage}</li>`;
+            const li = document.createElement('li');
+            // Apply a different class or style for the default message if you don't want the checkbox icon
+            li.classList.add('checklist-item-default'); 
+            li.textContent = defaultMessage;
+            element.appendChild(li);
         }
     }
+    // --- END UI IMPROVEMENT ---
+
     populateList(recommendationsPlantEl, data.recommendations_plant, 'No plant recommendations provided by AI.');
     populateList(recommendationsSoilEl, data.recommendations_soil, 'No soil recommendations provided by AI.');
     
