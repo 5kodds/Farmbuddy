@@ -21,25 +21,28 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* UI IMPROVEMENT: Old .result-card layout styles can be removed or commented out */
+/* as layout is primarily handled by new HTML structure and Tailwind. */
+/*
 .result-card {
     min-height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* --- UI IMPROVEMENT: Add transition for hover effect --- */
+}
+*/
+
+/* UI IMPROVEMENT: Apply hover effect to the new container */
+.result-card-container {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* --- UI IMPROVEMENT: Add hover effect for result cards --- */
-.result-card:hover {
+.result-card-container:hover {
     transform: translateY(-4px); /* Lifts the card up slightly */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-lg equivalent */
 }
-/* --- END UI IMPROVEMENT --- */
+/* END UI IMPROVEMENT */
 
-.result-card ul {
-    padding-left: 1.5rem;
-}
 
 .custom-file-upload {
     border: 2px solid #3498db;
@@ -48,7 +51,7 @@ body {
     cursor: pointer;
     background-color: #3498db;
     color: white;
-    border-radius: 0.375rem; /* Tailwind's rounded-md */
+    border-radius: 0.375rem;
     transition: background-color 0.3s ease;
     text-align: center;
 }
@@ -79,7 +82,7 @@ input[type="file"] {
 }
 #fileName {
     margin-top: 0.5rem;
-    font-size: 0.875rem; /* text-sm */
+    font-size: 0.875rem;
     color: #555;
 }
 
@@ -116,75 +119,39 @@ input[type="file"] {
 
 #resultsSection {
     transition: opacity 0.5s ease-in-out;
-    opacity: 1; /* Default opacity when shown, JS will set to 0 before making visible for fade-in */
+    opacity: 1;
 }
 
-/* --- UI IMPROVEMENT: Styles for Checklist Items --- */
 .checklist-item {
-    list-style-type: none; /* Remove default bullet points */
-    position: relative;    /* For positioning the pseudo-element */
-    padding-left: 30px;  /* Space for the custom "checkbox" icon */
-    margin-bottom: 8px;  /* Spacing between items */
-    line-height: 1.4;    /* Adjust for better vertical alignment with the box */
+    list-style-type: none;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 .checklist-item::before {
-    content: "☐";        /* Unicode character for an empty ballot box */
-    /* Alternative characters: ⬜ (White Large Square), ○ (White Circle) */
+    content: "☐";
     position: absolute;
     left: 0;
-    top: 0px;             /* Adjust top position for vertical alignment if needed */
-    font-size: 1.3em;     /* Size of the "checkbox" icon */
-    color: #3498db;       /* Color of the "checkbox" icon (Tailwind's blue-500 equivalent) */
-    cursor: default;      /* Indicate it's not clickable (for now) */
+    top: 0px;
+    font-size: 1.3em;
+    color: #3498db;
+    cursor: default;
 }
 
-.checklist-item-default { /* Style for the "No recommendations" message */
+.checklist-item-default {
     list-style-type: none;
-    color: #6b7280; /* Tailwind gray-500 */
+    color: #6b7280;
     font-style: italic;
-    /* If you want the default message to also have a box, apply .checklist-item class to it in JS */
 }
-/* --- END UI IMPROVEMENT --- */
 
 
-/* --- CSS FOR BACKGROUND SILHOUETTES (COMMENTED OUT BY DEFAULT) --- */
-/* To enable silhouettes, uncomment this block and the <img> tags in the HTML body */
+/* CSS FOR BACKGROUND SILHOUETTES (COMMENTED OUT BY DEFAULT) */
 /*
-.background-silhouette {
-    position: fixed;
-    opacity: 0.08;
-    pointer-events: none;
-    z-index: -1;
-    object-fit: contain;
-}
-#maize-bg {
-    bottom: -20px;
-    left: -30px;
-    width: 200px;
-    height: auto;
-    transform: rotate(-15deg);
-}
-#cattle-bg {
-    bottom: 10px;
-    right: -40px;
-    width: 250px;
-    height: auto;
-}
-#venison-bg {
-    top: 5%;
-    right: 5%;
-    width: 150px;
-    height: auto;
-    opacity: 0.06;
-}
-@media (max-width: 768px) {
-    .background-silhouette {
-        opacity: 0.05;
-    }
-    #maize-bg { width: 120px; left: -20px; bottom: -10px; }
-    #cattle-bg { width: 150px; right: -25px; }
-    #venison-bg { display: none; }
-}
+.background-silhouette { ... }
+#maize-bg { ... }
+#cattle-bg { ... }
+#venison-bg { ... }
+@media (max-width: 768px) { ... }
 */
-/* --- END OF CSS FOR BACKGROUND SILHOUETTES --- */
