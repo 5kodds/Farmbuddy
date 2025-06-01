@@ -221,7 +221,7 @@ function showSuccess(message) { /* ... (same as before) ... */
 // Analyze button click listener
 analyzeButton.addEventListener('click', async () => {
     const userText = textInput.value.trim();
-    const apiKey = "YOUR_GEMINI_API_KEY_HERE"; // <-- USER ACTION REQUIRED: REPLACE THIS!
+    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; // <-- USER ACTION REQUIRED: REPLACE THIS!
     const usingDirectGeminiCall = true; 
 
     if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) { /* ... (API key check) ... */ 
