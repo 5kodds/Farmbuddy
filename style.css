@@ -1,0 +1,151 @@
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden; 
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto; /* Reduced top/bottom margin */
+}
+@keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+
+.result-card { 
+    min-height: 100px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+.result-card ul { 
+    padding-left: 1.5rem; 
+}
+
+.custom-file-upload {
+    border: 2px solid #3498db; 
+    display: inline-block; 
+    padding: 8px 15px; 
+    cursor: pointer;
+    background-color: #3498db; 
+    color: white; 
+    border-radius: 0.375rem; /* Tailwind's rounded-md */
+    transition: background-color 0.3s ease; 
+    text-align: center;
+}
+.custom-file-upload:hover { 
+    background-color: #2980b9; 
+}
+input[type="file"] { 
+    display: none; 
+}
+
+#imagePreviewContainer {
+    width: 100%; 
+    max-width: 300px; 
+    height: auto; 
+    margin-top: 1rem;
+    border: 1px dashed #ccc; 
+    border-radius: 0.375rem; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+}
+#imagePreview { 
+    max-width: 100%; 
+    max-height: 200px; 
+    object-fit: cover; 
+    border-radius: 0.375rem; 
+}
+#fileName { 
+    margin-top: 0.5rem; 
+    font-size: 0.875rem; /* text-sm */
+    color: #555; 
+}
+
+.api-key-warning {
+    background-color: #fff3cd; 
+    color: #856404; 
+    border: 1px solid #ffeeba;
+    padding: 0.75rem 1.25rem; 
+    margin-bottom: 1rem; 
+    border-radius: 0.375rem; 
+    font-size: 0.9rem;
+}
+.api-key-warning strong { 
+    font-weight: bold; 
+}
+
+.alert-box {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+}
+.alert-error {
+    color: #721c24; 
+    background-color: #f8d7da; 
+    border-color: #f5c6cb; 
+}
+.alert-success {
+    color: #155724; 
+    background-color: #d4edda; 
+    border-color: #c3e6cb; 
+}
+
+#resultsSection {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1; /* Default opacity when shown, JS will set to 0 before making visible for fade-in */
+}
+
+/* --- CSS FOR BACKGROUND SILHOUETTES (COMMENTED OUT BY DEFAULT) --- */
+/* To enable silhouettes, uncomment this block and the <img> tags in the HTML body */
+/*
+.background-silhouette {
+    position: fixed;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: -1;
+    object-fit: contain;
+}
+#maize-bg {
+    bottom: -20px;
+    left: -30px;
+    width: 200px;
+    height: auto;
+    transform: rotate(-15deg);
+}
+#cattle-bg {
+    bottom: 10px;
+    right: -40px;
+    width: 250px;
+    height: auto;
+}
+#venison-bg {
+    top: 5%;
+    right: 5%;
+    width: 150px;
+    height: auto;
+    opacity: 0.06;
+}
+@media (max-width: 768px) {
+    .background-silhouette {
+        opacity: 0.05;
+    }
+    #maize-bg { width: 120px; left: -20px; bottom: -10px; }
+    #cattle-bg { width: 150px; right: -25px; }
+    #venison-bg { display: none; }
+}
+*/
+/* --- END OF CSS FOR BACKGROUND SILHOUETTES --- */
