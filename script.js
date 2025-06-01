@@ -153,7 +153,7 @@ analyzeButton.addEventListener('click', async () => {
     const userText = textInput.value.trim();
     
     // --- USER ACTION REQUIRED: API Key ---
-    const apiKey = "YOUR_GEMINI_API_KEY_HERE"; // <-- REPLACE THIS!
+    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; // <-- REPLACE THIS!
     
     const usingDirectGeminiCall = true; 
 
