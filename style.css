@@ -21,28 +21,14 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* UI IMPROVEMENT: Old .result-card layout styles can be removed or commented out */
-/* as layout is primarily handled by new HTML structure and Tailwind. */
-/*
-.result-card {
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-*/
-
-/* UI IMPROVEMENT: Apply hover effect to the new container */
-.result-card-container {
+.result-card-container { /* Updated from .result-card for hover effects */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .result-card-container:hover {
-    transform: translateY(-4px); /* Lifts the card up slightly */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-lg equivalent */
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
-/* END UI IMPROVEMENT */
-
 
 .custom-file-upload {
     border: 2px solid #3498db;
@@ -146,12 +132,17 @@ input[type="file"] {
     font-style: italic;
 }
 
+/* NEW: Optional styling for the video element */
+#videoElement {
+    /* transform: scaleX(-1); /* Uncomment to mirror the video (for selfie-style previews) */
+                               /* For 'facingMode: "environment"', mirroring is usually NOT desired. */
+    background-color: #e5e7eb; /* Tailwind gray-200, fallback if video is slow to load */
+    width: 100%; /* Ensure it fills its container if container has max-width */
+}
+
 
 /* CSS FOR BACKGROUND SILHOUETTES (COMMENTED OUT BY DEFAULT) */
 /*
 .background-silhouette { ... }
-#maize-bg { ... }
-#cattle-bg { ... }
-#venison-bg { ... }
-@media (max-width: 768px) { ... }
+...
 */
