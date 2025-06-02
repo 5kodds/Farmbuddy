@@ -220,22 +220,31 @@ function showSuccess(message) { /* ... (same as before) ... */
 
 // Analyze button click listener
 analyzeButton.addEventListener('click', async () => {
+    // --- DEBUGGING: Confirm button click ---
+    console.log("Analyze button clicked!");
+
     const userText = textInput.value.trim();
-    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; // <-- USER ACTION REQUIRED: REPLACE THIS!
+    // --- API KEY: Replaced with the key you provided ---
+    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; 
     const usingDirectGeminiCall = true; 
 
-    if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) { /* ... (API key check) ... */ 
+    // --- IMPORTANT: API Key Check ---
+    // If you see an "API Key not configured" error, ensure the apiKey variable above is correctly set.
+    if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) { 
         showError("API Key not configured. Please set it in the script.js file.");
         apiKeyWarningSection.style.backgroundColor = '#f8d7da'; 
         apiKeyWarningSection.style.borderColor = '#f5c6cb';
         apiKeyWarningSection.style.color = '#721c24';
         return;
-    } else if (usingDirectGeminiCall) { /* ... (reset API key warning style) ... */ 
+    } else if (usingDirectGeminiCall) { 
         apiKeyWarningSection.style.backgroundColor = '#fff3cd';
         apiKeyWarningSection.style.borderColor = '#ffeeba';
         apiKeyWarningSection.style.color = '#856404';
     }
 
+    // --- IMPORTANT: Input Validation ---
+    // The button will not proceed if no text, image, or audio is provided.
+    // Ensure you have at least one input before clicking.
     if (!userText && !base64ImageData && !base64AudioData) { // Validation includes all three types of input
         showError('Please provide text, an image, or record audio.');
         return;
@@ -269,10 +278,11 @@ Please provide your response in the specified JSON format. Prioritize visual and
 
         const parts = [];
         parts.push({ text: prompt });
-        if (base64ImageData) { parts.push({ inline_data: { mime_type: currentMimeType, data: base64ImageData } }); }
-        if (base64AudioData && audioMimeType) { parts.push({ inline_data: { mime_type: audioMimeType, data: base64AudioData } }); }
+        // --- FIX: Changed inline_data to inlineData and mime_type to mimeType ---
+        if (base64ImageData) { parts.push({ inlineData: { mimeType: currentMimeType, data: base64ImageData } }); }
+        if (base64AudioData && audioMimeType) { parts.push({ inlineData: { mimeType: audioMimeType, data: base64AudioData } }); }
         
-        const geminiPayload = { /* ... (same schema as before) ... */ 
+        const geminiPayload = { 
             contents: [{ role: "user", parts: parts }],
             generationConfig: {
                 responseMimeType: "application/json",
@@ -291,7 +301,7 @@ Please provide your response in the specified JSON format. Prioritize visual and
         const directApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         try {
-            const response = await fetch(directApiUrl, { /* ... */ 
+            const response = await fetch(directApiUrl, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(geminiPayload)
@@ -307,11 +317,11 @@ Please provide your response in the specified JSON format. Prioritize visual and
                 showSuccess("Farm Buddy has your results below."); 
             } else { 
                 if (result.promptFeedback?.blockReason) {
-                     throw new Error(`Farm Buddy's analysis was blocked. Reason: ${result.promptFeedback.blockReason}.`);
+                    throw new Error(`Farm Buddy's analysis was blocked. Reason: ${result.promptFeedback.blockReason}.`);
                 }
                 throw new Error('Farm Buddy returned an unexpected response structure.');
             }
-        } catch (error) { /* ... (same error handling) ... */ 
+        } catch (error) { 
             console.error('Direct API Call Error:', error);
             showError(`Error: ${error.message}`); 
             loadingContainer.classList.add('hidden'); 
@@ -319,12 +329,12 @@ Please provide your response in the specified JSON format. Prioritize visual and
             analyzeButton.classList.remove('opacity-50', 'cursor-not-allowed');
             return;
         }
-    } else { /* ... (backend call placeholder) ... */ 
-         showError('Backend call not implemented.'); 
-         loadingContainer.classList.add('hidden'); 
-         analyzeButton.disabled = false;
-         analyzeButton.classList.remove('opacity-50', 'cursor-not-allowed');
-         return; 
+    } else { 
+        showError('Backend call not implemented.'); 
+        loadingContainer.classList.add('hidden'); 
+        analyzeButton.disabled = false;
+        analyzeButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        return; 
     }
     
     if (responseData) {
@@ -336,7 +346,7 @@ Please provide your response in the specified JSON format. Prioritize visual and
             loadingContainer.classList.add('hidden');
         }, 1500); 
     } else {
-         loadingContainer.classList.add('hidden');
+        loadingContainer.classList.add('hidden');
     }
     
     analyzeButton.disabled = false;
