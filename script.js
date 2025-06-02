@@ -230,7 +230,8 @@ analyzeButton.addEventListener('click', async () => {
 
     // --- IMPORTANT: API Key Check ---
     // If you see an "API Key not configured" error, ensure the apiKey variable above is correctly set.
-    if (usingDirectGeminiCall && (apiKey === "AIzaSyDbUjMksaajSFZNpYtSVPsfScc6Oz5scbs" || !apiKey)) { 
+    // FIX: Changed the comparison string to the original placeholder "YOUR_GEMINI_API_KEY_HERE"
+    if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) { 
         showError("API Key not configured. Please set it in the script.js file.");
         apiKeyWarningSection.style.backgroundColor = '#f8d7da'; 
         apiKeyWarningSection.style.borderColor = '#f5c6cb';
