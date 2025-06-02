@@ -225,12 +225,12 @@ analyzeButton.addEventListener('click', async () => {
 
     const userText = textInput.value.trim();
     // --- API KEY: Replaced with the key you provided ---
-    const apiKey = "AIzaSyD797XpTrqRALSAZsc-sEAkRwRoYoYcYUI"; 
+    const apiKey = "AIzaSyDbUjMksaajSFZNpYtSVPsfScc6Oz5scbs"; 
     const usingDirectGeminiCall = true; 
 
     // --- IMPORTANT: API Key Check ---
     // If you see an "API Key not configured" error, ensure the apiKey variable above is correctly set.
-    if (usingDirectGeminiCall && (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey)) { 
+    if (usingDirectGeminiCall && (apiKey === "AIzaSyDbUjMksaajSFZNpYtSVPsfScc6Oz5scbs" || !apiKey)) { 
         showError("API Key not configured. Please set it in the script.js file.");
         apiKeyWarningSection.style.backgroundColor = '#f8d7da'; 
         apiKeyWarningSection.style.borderColor = '#f5c6cb';
